@@ -22,8 +22,6 @@ GEM
       activesupport (= 3.2.1)
       arel (~> 3.0.0)
       tzinfo (~> 0.3.29)
-    activerecord-mysql2-adapter (0.0.3)
-      mysql2
     activeresource (3.2.1)
       activemodel (= 3.2.1)
       activesupport (= 3.2.1)
@@ -149,7 +147,6 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  activerecord-mysql2-adapter
   capistrano
   carrierwave
   coffee-rails (~> 3.2.1)
