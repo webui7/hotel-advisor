@@ -24,7 +24,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: premierd_hotel48
-  username: premierd_hotel48
-  password: d3SC4C2S
+  database: premierd_hotel13
+  username: premierd_hotel13
+  password: Z9Ns9UHG
   host: mysql5.locum.ru
