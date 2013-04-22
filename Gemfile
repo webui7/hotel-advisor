@@ -36,6 +36,7 @@ gem 'jquery-rails'
 # Use unicorn as the web server
 group :production do
 	gem 'unicorn'
+    gem 'therubyracer'
 end
 
 
