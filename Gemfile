@@ -11,7 +11,7 @@ gem 'devise'
 gem 'will_paginate', '~> 3.0'
 gem 'kaminari'
 gem 'capistrano'
-gem 'mysql2'
+gem 'mysql2', "~>0.3.11"
 
 
 
