@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  star_id: 1
+  breakfast: false
+  roomdescription: MyText
+  photo: MyString
+  roomprice: 9.99
+
+two:
+  title: MyString
+  star_id: 1
+  breakfast: false
+  roomdescription: MyText
+  photo: MyString
+  roomprice: 9.99

@@ -1,0 +1,86 @@
+<%= form_for @hotel, html:{:class => 'custom'} do |f| %>
+  <% if @hotel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hotel.errors.count, "error") %> prohibited this hotel from being saved:</h2>
+
+      <ul>
+      <% @hotel.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="large-4 columns"><%= f.label :title %></div>
+    <div class="large-8 columns left"><%= f.text_field :title %></div>
+  </div>
+
+  <div class="row">
+    <div class="large-4 columns"><%= f.label :star_id %></div>
+    <div class="large-2 columns left">
+    	<% stars_array = Star.all.map { |star| [star.rate, star.id] } %>
+		<%= f.select(:star_id,stars_array, { :include_blank => true},:id => "customDropdown", :class => "medium")  %>
+	</div>
+  </div>
+
+   <div class="row hotelcheckbox">
+    <div class="large-4 columns"><%= f.label "Breakfast" %></div>
+    <div class="large-8 columns"><label for="checkbox1"><%= f.check_box :breakfast, {:id => "checkbox1", :style => "display:none;"} %><span class="custom checkbox"></span></label></div>
+  </div>
+
+
+   <div class="row">
+    <div class="large-4 columns"><%= f.label "Room" %></div>
+    <div class="large-8 columns"><%= f.text_area :roomdescription, {:style => "height:150px"} %></div>
+  </div>
+   <% if  !@hotel.photo.blank?%>
+   <div class="row">
+    <div class="large-4 columns"><%= f.label "Photo" %></div>
+    <div class="small-6 large-4 columns left"><img src="<%=@hotel.photo%>" title="<%= @hotel.title %>" ></div>
+  </div>
+  <%end%>
+
+   <div class="row hotelcheckbox">
+    <div class="large-4 columns">
+    <%if !@hotel.photo.blank?%>
+   		<%= f.label "New photo"  %>
+   	<%else%>
+    	<%= f.label "Photo"%>
+    <%end%>
+    </div>
+    <div class="large-8 columns"><%= f.file_field :photo %></div>
+  </div>
+
+  <div class="row ">
+    <div class="large-4 columns"><%= f.label "Price of the room" %></div>
+    <div class="large-2 columns"><%= f.text_field :roomprice %></div>
+    <div class="large-2 columns left">USD</div>
+  </div>
+
+
+
+<%= fields_for @hotel.address do |address_form| %>
+      <div class="row">
+    		<div class="large-4 columns"><%= address_form.label :country %></div>
+   			<div class="large-4 columns left"><%= address_form.text_field :country %></div>
+  	  </div>
+      <div class="row">
+    		<div class="large-4 columns"><%= address_form.label :state %></div>
+   			<div class="large-4 columns left"><%= address_form.text_field :state %></div>
+  	  </div>
+      <div class="row">
+    		<div class="large-4 columns"><%= address_form.label :city %></div>
+   			<div class="large-4 columns left"><%= address_form.text_field :city %></div>
+  	  </div>
+      <div class="row">
+    		<div class="large-4 columns"><%= address_form.label :street %></div>
+   			<div class="large-4 columns left"><%= address_form.text_field :street %></div>
+  	  </div>
+<% end %>
+
+
+  <div class="actions">
+    <%= f.submit 'Submit',:class => 'button round' %>
+  </div>
+<% end %>

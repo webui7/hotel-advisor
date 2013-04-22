@@ -1,0 +1,36 @@
+<div class="fixed">
+<nav class="top-bar">
+ <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+      <h1><a href="http://<%=request.host%>">HOTEL ADVISOR</a></h1>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+ </ul>
+
+<section class="top-bar-section">
+ <ul class="right">
+
+	    <% if user_signed_in? %>
+	     <li><div class=user_nav> Welcome! <%= current_user.email %></div></li><li><%= link_to 'Sign out', destroy_user_session_path %></li>
+	    <% else %>
+	    <li><%= link_to 'Register', new_user_registration_path %></li><li> <div class=user_nav>or</div> </li><li><%= link_to 'Sign in', new_user_session_path %></li>
+	    <% end %>
+
+
+ </ul>
+
+</section>
+<section class="top-bar-section">
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li class="divider"></li>
+      <li ><a href="/hotels">All hotels</a></li>
+      <li class="divider"></li>
+    </ul>
+</section>
+
+
+</nav>
+</div>

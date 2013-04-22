@@ -1,0 +1,24 @@
+<%if @hotel.nil?%>
+<%a=@comment%>
+<%else%>
+<%a=[@hotel, @hotel.comments.build]%>
+<%end%>
+<%= form_for(a, html:{:class => 'custom'}) do |f| %>
+
+   <div class="row">
+	   <div class="large-2 columns"><%= f.label :hotelrate_id %></div>
+
+
+	   <% rates_array = Hotelrate.all.map { |rate| [rate.rate, rate.id] } %>
+	   <div class="large-4 columns left">
+			<%= f.select(:hotelrate_id,rates_array, {},:id => "customDropdown", :class => "medium") %>
+	  </div>
+  </div>
+  <div class="row">
+	  <div class="large-2 columns"> <%= f.label :body %></div>
+	  <div class="large-4 columns left"	><%= f.text_area :body , {:style => "height:150px"}%></div>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Submit',:class => 'button round' %>
+  </div>
+<% end %>

@@ -1,0 +1,96 @@
+
+<div class="row">
+	<h1><%= @hotel.title %></h1>
+</div>
+<div class="row">
+<%= link_to 'Back to hotels list', tophotels_path , :class=> "button" %>
+</div>
+
+
+
+<div class="row botompadding10">
+	<div class="large-2  small-4 columns left"><strong>Stars:</strong></div>
+	<div class="large-4  small-4 columns left"><%= @hotel.star_id %></div>
+</div>
+
+<div class="row botompadding10">
+	<div class="large-2  small-4 columns left"><b>Hotel rate:</b></div>
+	<div class="large-4  small-4 columns left"><%= @hotel.averagerate %></div>
+</div>
+
+<div class="row botompadding10">
+  <div class="large-2  small-4 columns left"><b>Breakfast:</b></div>
+  <% if @hotel.breakfast == true%>
+  	<div class="large-4  small-4 columns left">Yes</div>
+  <%else%>
+    <div class="large-4  small-4 columns left">No</div>
+  <%end%>
+</div>
+
+<div class="row botompadding10">
+ <div class="large-2  small-4 columns left"> <b>Roomdescription:</b></div>
+   <% if @hotel.roomdescription.blank?%>
+  	 <div class="large-4  small-4 columns left">No information</div>
+  <%else%>
+      <div class="large-4  small-4 columns left"><%=simple_format @hotel.roomdescription %></div>
+  <%end%>
+
+</div>
+
+<div class="row botompadding10">
+	<div class="large-2  small-4 columns left"><b>Photo:</b></div>
+	<% if  !@hotel.photo.blank?%>
+    	<div class="large-4  small-4 columns left">	<img src="<%= @hotel.photo %>" ></div>
+    <%else%>
+	    <div class="large-4  small-4 columns left">No photo</div>
+    <%end%>
+</div>
+
+<div class="row">
+  <b>Roomprice:</b>
+  <%= @hotel.roomprice %>
+</div>
+
+<%if @hotel.comments.length > 0 %>
+<div class="row">
+<h2>Comments</h2>
+</div>
+<% @comments.each do |comment| %>
+<div class="row ">
+<div class="large-8  small-8 columns comments">
+		<div class="row">
+	    	<div class="large-2  small-3 columns">
+	    		<i>author:</i>
+	    	</div>
+	    	<div class="large-5 small-5 columns left">
+	    			<%= comment.user.email %>
+	    	</div>
+	    </div>
+	    <div class="row">
+	    	<div class="large-2  small-3 columns">
+	    		<i>hotel rate:</i>
+	    	</div>
+	    	<div class="large-5 small-5 columns left">
+	    		<%= comment.hotelrate.rate %>
+	    	</div>
+	    </div>
+	    <div class="row botompadding30">
+	    	<div class="large-2  small-3 columns">
+	    		<i>comment:</i>
+	    	</div>
+	    	<div class="large-5 small-5 columns left">
+	    		<%=simple_format comment.body %>
+	    	</div>
+	    </div>
+
+</div>
+</div>
+<% end %>
+</div>
+<%end %>
+
+
+
+
+
+

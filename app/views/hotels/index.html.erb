@@ -1,0 +1,43 @@
+
+
+<div class="row"><h1>Listing hotels</h1></div>
+<div class="row"><%= link_to 'New Hotel', new_hotel_path, :class=> "button"%></div>
+<div class="row"><%= will_paginate @klinikis%></div>
+<% @hotels.each do |hotel| %>
+<div class="row panel">
+	<div class="small-12 large-12 columns">
+		<div class="row">
+			<div class="small-4 large-4 columns"><h2><%= hotel.title %></h2></div>
+	    </div>
+	    <div class="row">
+	    	<div class="small-6 large-4 columns">
+	    	<%if hotel.photo.blank?%>
+	    		 No photo
+	    	<%else%>
+	    		<img src="<%=hotel.photo%>" title="<%= hotel.title %>" >
+	    	<%end%>
+	    	</div>
+	    	<div class="small-6 large-8 columns" style="float:left">
+	    		<div class="hotel-items">Stars:<%= hotel.star.id %></div>
+	    		<div class="hotel-items">Country:<%=hotel.address.country%></div>
+				<div class="hotel-items">Author:<%= hotel.user.email %></div>
+				<div>
+					    <%= link_to 'Show', hotel, :class => "small button" %>
+					    <%if current_user.hotels.find_by_id(hotel.id)%>
+					    	<%= link_to 'Edit', edit_hotel_path(hotel), :class => "small button" %>
+					    <%end%>
+					    <%if current_user.hotels.find_by_id(hotel.id)%>
+					    	<%= link_to 'Destroy', hotel, confirm: 'Are you sure?', method: :delete, :class => "small button" %>
+					    <%end%>
+				</div>
+	       </div>
+	    </div>
+    </div>
+
+</div>
+<% end %>
+<div class="row"><%= will_paginate @klinikis%></div>
+</br>
+</br>
+
+
