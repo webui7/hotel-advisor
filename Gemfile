@@ -11,7 +11,6 @@ gem 'devise'
 gem 'will_paginate', '~> 3.0'
 gem 'kaminari'
 gem 'capistrano'
-gem 'activerecord-mysql2-adapter'
 
 # Gems used only for assets and not required
 # in production environments by default.
