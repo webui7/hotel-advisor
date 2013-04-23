@@ -1,4 +1,4 @@
-
+<%title @hotel.title %>
 <div class="row">
 	<h1><%= @hotel.title %></h1>
 </div>
@@ -51,9 +51,9 @@
     <%end%>
 </div>
 
-<div class="row">
-  <b>Roomprice:</b>
-  <%= @hotel.roomprice %> USD
+<div class="row botompadding10">
+   <div class="large-2  small-4 columns left"> <b>Roomprice:</b></div>
+   <div class="large-4  small-4 columns left"><%= @hotel.roomprice %> USD</div>
 </div>
 <%current_user_comment=false %>
 <%if @hotel.comments.length > 0 %>

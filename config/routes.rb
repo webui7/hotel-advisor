@@ -5,7 +5,9 @@ HotelAdvisor::Application.routes.draw do
   resources :hotels do
     resources :comments
   end
-devise_for :users do
+  devise_for :users
+
+  devise_scope :user do
     get 'users/sign_out' => 'devise/sessions#destroy'
     get 'users/log_in' => 'devise/sessions#new'
     get 'users/log_out' => 'devise/sessions#destroy'
