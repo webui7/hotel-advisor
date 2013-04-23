@@ -2,6 +2,12 @@
 <div class="row">
 	<h1><%= @hotel.title %></h1>
 </div>
+<div class="row botompadding30">
+	<%= @hotel.address.street %><%="," if !@hotel.address.street.blank?%>
+	<%= @hotel.address.city %> <%="," if !@hotel.address.city.blank?%>
+	<%= @hotel.address.state %> <%="," if !@hotel.address.state.blank?%>
+	<%= @hotel.address.country %>
+</div>
 <div class="row">
 <%= link_to 'Back to hotels list', tophotels_path , :class=> "button" %>
 </div>
