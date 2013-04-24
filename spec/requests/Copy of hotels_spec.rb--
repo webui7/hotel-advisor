@@ -1,0 +1,35 @@
+require 'spec_helper'
+
+describe "Hotels" do
+  describe 'All Hotels' do
+    it 'Add new Hotel' do
+      visit hotels_url
+      expect{
+        click_link 'New Hotel'
+        fill_in 'title', with: 'newest hotel'
+        fill_in 'star_id', with: 1
+        fill_in 'breakfast', with: true
+        fill_in 'roomdescription', with: "discription"
+        fill_in 'photo', with: "photo"
+        fill_in 'roomprice', with: 10.3
+        fill_in 'country', with: "country"
+        fill_in 'state', with: "state"
+        fill_in 'city', with: "city"
+        fill_in 'street', with: "street"
+        click_button "Submit"
+      }.to change(Hotel,:count).by(1)
+      page.should have_content "Hotel was successfully created"
+      within 'h1' do
+        page.should have_content "newest hotel"
+      end
+
+      page.should have_content "star 1"
+      page.should have_content "breakfast Yes"
+      page.should have_content "roompricet 10.3"
+      page.should have_content "street street"
+      page.should have_content "country country"
+      page.should have_content "city city"
+      page.should have_content "street street"
+    end
+  end
+end

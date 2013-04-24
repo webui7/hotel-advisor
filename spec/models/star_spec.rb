@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe User do
+describe Star do
 
   it "user star is valid " do
-    FactoryGirl.create(:user).should be_valid
+    FactoryGirl.create(:star).should be_valid
   end
 
 
