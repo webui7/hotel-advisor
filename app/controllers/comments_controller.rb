@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_filter :authenticate_user!
   def create
     @hotel = Hotel.find(params[:hotel_id])
-    @comment = @hotel.comments.create(params[:comment])
+    @comment = @hotel.comments.build(params[:comment])
     @comment.user_id=current_user.id
     respond_to do |format|
       if @comment.save
