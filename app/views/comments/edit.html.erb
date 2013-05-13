@@ -4,7 +4,18 @@
 <%= link_to 'Back', @showhotel, :class=> "button" %>
 </div>
 <div class="row">
-<%= render 'comments/form' %>
+<%= form_for(@comment, html:{:class => 'custom'}) do |f| %>
+<% @comment.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+<% end %>
+
+<%= render "comments/form", :f=> f %>
+
+  <div class="actions">
+    <%= f.submit 'Submit', :class => 'button round' %>
+  </div>
+
+<%end %>
 </div>
 
 

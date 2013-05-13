@@ -16,7 +16,9 @@ class HotelsController < ApplicationController
   def show
     @hotel = Hotel.find(params[:id])
     @comments = @hotel.comments
+    #@comment=@hotel.comments.build
     respond_to do |format|
+
       format.html # show.html.erb
       format.json { render json: @hotel }
     end

@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
+
   def create
     @hotel = Hotel.find(params[:hotel_id])
     @comment = @hotel.comments.build(params[:comment])
@@ -11,11 +12,8 @@ class CommentsController < ApplicationController
           @hotel.averagerate = averagerate
           @hotel.save
           format.html { redirect_to hotel_path(@hotel), notice: 'Comment was successfully created.' }
-
       else
-
-        format.html { redirect_to hotel_path(@hotel) }
-
+        format.html { redirect_to hotel_path(@hotel)}
       end
     end
   end

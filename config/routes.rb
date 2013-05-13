@@ -1,10 +1,10 @@
 HotelAdvisor::Application.routes.draw do
   resources :tophotels
   resources :addresses
-  resources :comments
   resources :hotels do
     resources :comments
   end
+  resources :comments
   devise_for :users
 
   devise_scope :user do

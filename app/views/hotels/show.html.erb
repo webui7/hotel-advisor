@@ -61,6 +61,7 @@
 <h2>Comments</h2>
 </div>
 <% @comments.each do |comment| %>
+ <%#next  if comment == @comments.last%>
 <div class="row ">
 <div class="large-8  small-8 columns comments">
 		<div class="row">
@@ -108,10 +109,20 @@
 <%if current_user_comment == false %>
 <div class="row">
 <h2>You can add a comment:</h2>
-<%= render 'comments/form' %>
-</div>
+
+<%= form_for([@hotel, @hotel.comments.build], html:{:class => 'custom'}) do |f| %>
+
+<%= render "comments/form", :f=> f %>
+
+  <div class="actions">
+    <%= f.submit 'Submit', :class => 'button round' %>
+  </div>
+
 <%end %>
 
+
+</div>
+<% end %>
 
 
 

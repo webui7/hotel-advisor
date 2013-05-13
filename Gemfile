@@ -12,6 +12,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'kaminari'
 gem 'capistrano'
 gem 'mysql2', "~>0.3.11"
+gem 'nested_form'
 
 
 
