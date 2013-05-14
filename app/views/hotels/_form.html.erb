@@ -1,4 +1,4 @@
-<%= form_for @hotel, html:{:class => 'custom'} do |f| %>
+<%= nested_form_for @hotel, html:{:class => 'custom'} do |f| %>
   <% if @hotel.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@hotel.errors.count, "error") %> prohibited this hotel from being saved:</h2>
@@ -37,7 +37,7 @@
    <% if  !@hotel.photo.blank?%>
    <div class="row">
     <div class="large-4 columns"><%= f.label "Photo" %></div>
-    <div class="small-6 large-4 columns left"><img src="<%=@hotel.photo%>" title="<%= @hotel.title %>" ></div>
+    <div class="small-6 large-4 columns left">	<%=image_tag @hotel.photo, :alt => @hotel.title, :title => @hotel.title %></div>
   </div>
   <%end%>
 
@@ -60,7 +60,7 @@
 
 
 
-<%= fields_for @hotel.address do |address_form| %>
+<%= f.fields_for :address do |address_form| %>
       <div class="row">
     		<div class="large-4 columns"><%= address_form.label :country %></div>
    			<div class="large-4 columns left"><%= address_form.text_field :country %></div>

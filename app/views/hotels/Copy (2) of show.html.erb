@@ -8,11 +8,13 @@
 	<%= @hotel.address.state %> <%="," if !@hotel.address.state.blank?%>
 	<%= @hotel.address.country %>
 </div>
+
 <div class="row">
-<%= link_to 'Back to hotels list', tophotels_path , :class=> "button" %>
+<%= link_to 'Back to hotels list', hotels_path , :class=> "button" %>
+<%if current_user.hotels.find_by_id(@hotel.id)%>
+	<%= link_to 'Edit hotel', edit_hotel_path(@hotel) , :class=> "button" %>
+<%end%>
 </div>
-
-
 
 <div class="row botompadding10">
 	<div class="large-2  small-4 columns left"><strong>Stars:</strong></div>
@@ -51,17 +53,18 @@
 	    <div class="large-4  small-4 columns left">No photo</div>
     <%end%>
 </div>
-<div style="clear:both"></div>
+
 <div class="row botompadding10">
-  <div class="large-2  small-4 columns left"><strong>Roomprice:</strong></div>
-  <div class="large-4  small-4 columns left"><%= @hotel.roomprice %> USD</div>
+   <div class="large-2  small-4 columns left"> <b>Roomprice:</b></div>
+   <div class="large-4  small-4 columns left"><%= @hotel.roomprice %> USD</div>
 </div>
-<div style="clear:both"></div>
+<%current_user_comment=false %>
 <%if @hotel.comments.length > 0 %>
 <div class="row">
 <h2>Comments</h2>
 </div>
 <% @comments.each do |comment| %>
+ <%#next  if comment == @comments.last%>
 <div class="row ">
 <div class="large-8  small-8 columns comments">
 		<div class="row">
@@ -69,7 +72,11 @@
 	    		<i>author:</i>
 	    	</div>
 	    	<div class="large-5 small-5 columns left">
+	    		<%if comment.user.id == current_user.id %>
+	    			<strong>your comment</strong>
+	    		<%else%>
 	    			<%= comment.user.email %>
+	    		<%end%>
 	    	</div>
 	    </div>
 	    <div class="row">
@@ -84,10 +91,16 @@
 	    	<div class="large-2  small-3 columns">
 	    		<i>comment:</i>
 	    	</div>
-	    	<div class="large-10 small-9 columns left">
+	    	<div class="large-10 small-8 columns left">
 	    		<%=simple_format comment.body %>
 	    	</div>
 	    </div>
+	    <%if comment.user.id == current_user.id %>
+	    <div >
+	    	<%current_user_comment=true %>
+			<%= link_to 'Edit comment', edit_comment_path(comment) %> |
+			<%= link_to 'Destroy comment', comment, confirm: 'Are you sure?', method: :delete %>
+	    <%end%>
 
 </div>
 </div>
@@ -96,7 +109,22 @@
 <%end %>
 
 
+<%if current_user_comment == false %>
+	<div class="row">
+	<h2>You can add a comment:</h2>
 
+	<%= nested_form_for(@hotel,:method => :post,:url => hotel_comments_path(@hotel), html:{:class => 'custom'}) do |f| %>
+	<%= f.fields_for :comments do |task_form| %>
+	 <%= render "comments/form", :f=> task_form %>
+	 <%end %>
+	  <div class="actions">
+	    <%= f.submit 'Submit', :class => 'button round' %>
+	  </div>
+	<%end %>
+
+
+	</div>
+<% end %>
 
 
 

@@ -1,19 +1,15 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
 
+
   def create
-    @hotel = Hotel.find(params[:hotel_id])
-    @comment = @hotel.comments.build(params[:comment])
-    @comment.user_id=current_user.id
+    @comment=Comment.publish_new_comment(params[:hotel_id],params[:comment],current_user)
     respond_to do |format|
       if @comment.save
-          @comments = @hotel.comments
-          averagerate = @comments.collect{|comment| comment.hotelrate.rate}.sum.to_f/@comments.length if @comments.length > 0
-          @hotel.averagerate = averagerate
-          @hotel.save
-          format.html { redirect_to hotel_path(@hotel), notice: 'Comment was successfully created.' }
+          Comment.calculate_averagerate(@comment)
+          format.html { redirect_to hotel_path(@comment.hotel), notice: 'Comment was successfully created.' }
       else
-        format.html { redirect_to hotel_path(@hotel)}
+        format.html { render action: "new" }
       end
     end
   end
@@ -25,14 +21,10 @@ class CommentsController < ApplicationController
 
    def update
     @comment = current_user.comments.find(params[:id])
-    @showhotel = @comment.hotel
-    @comments = @showhotel.comments
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-          averagerate = @comments.collect{|comment| comment.hotelrate.rate}.sum.to_f/@comments.length if @comments.length > 0
-          @showhotel.averagerate = averagerate
-          @showhotel.save
-          format.html { redirect_to @showhotel, notice: 'Comment was successfully updated.' }
+          Comment.calculate_averagerate(@comment)
+          format.html { redirect_to @comment.hotel, notice: 'Comment was successfully updated.' }
           format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -43,15 +35,10 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = current_user.comments.find(params[:id])
-    @showhotel = @comment.hotel
     @comment.destroy
-    @comments = @showhotel.comments
-    averagerate = @comments.collect{|comment| comment.hotelrate.rate}.sum.to_f/@comments.length if @comments.length > 0
-    @showhotel.averagerate = averagerate
-    @showhotel.save
-
+    Comment.calculate_averagerate(@comment)
     respond_to do |format|
-      format.html { redirect_to @showhotel }
+      format.html { redirect_to @comment.hotel }
       format.json { head :no_content }
     end
   end

@@ -13,7 +13,7 @@
 	    	<%if hotel.photo.blank?%>
 	    		 No photo
 	    	<%else%>
-	    		<img src="<%=hotel.photo%>" title="<%= hotel.title %>" >
+	    	    <%=image_tag hotel.photo, :alt => hotel.title, :title => hotel.title %>
 	    	<%end%>
 	    	</div>
 	    	<div class="small-6 large-8 columns" style="float:left">
@@ -24,8 +24,6 @@
 					    <%= link_to 'Show', hotel, :class => "small button" %>
 					    <%if current_user.hotels.find_by_id(hotel.id)%>
 					    	<%= link_to 'Edit', edit_hotel_path(hotel), :class => "small button" %>
-					    <%end%>
-					    <%if current_user.hotels.find_by_id(hotel.id)%>
 					    	<%= link_to 'Destroy', hotel, confirm: 'Are you sure?', method: :delete, :class => "small button" %>
 					    <%end%>
 				</div>

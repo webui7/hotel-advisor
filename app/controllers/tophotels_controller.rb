@@ -1,7 +1,7 @@
 class TophotelsController < ApplicationController
 
   def index
-    @tophotels = Hotel.limit(5).order(:averagerate).reverse_order
+    @tophotels = Hotel.tophotel
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @hotels }
