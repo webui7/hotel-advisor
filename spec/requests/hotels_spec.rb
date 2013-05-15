@@ -22,7 +22,6 @@ describe "Hotels" do
     end
 
 
-  #describe "sign in process",  :type => :feature do
   describe "sign in process & add hotel & add comment" do
     before :each do
       FactoryGirl.create(:user)
@@ -70,16 +69,6 @@ describe "Hotels" do
       end
     end
   end
-
-
-
-
-
-
-
-
-
-
 
 end
 
