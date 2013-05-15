@@ -5,6 +5,6 @@ FactoryGirl.define do
     f.body "body"
     f.hotel_id 1
     f.user_id 1
-    f.hotelrate_id 1
+    f.hotel_rate_id 1
   end
 end

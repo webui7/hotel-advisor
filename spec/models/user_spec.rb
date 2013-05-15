@@ -6,17 +6,13 @@ describe User do
     FactoryGirl.create(:user).should be_valid
   end
 
-  it "User is invalid without a password" do
-    FactoryGirl.build(:user, password: nil).should_not be_valid
-  end
 
-  it "User is invalid without a email" do
-    FactoryGirl.build(:user, email: nil).should_not be_valid
-  end
+   it { should have_many(:comments) }
+   it { should have_many(:hotels) }
+   it { should validate_presence_of(:password) }
+   it { should ensure_length_of(:password).is_at_least(8)}
+   it { should validate_presence_of(:email) }
 
-  it "is invalid with a password < 8 symbols" do
-    FactoryGirl.build(:user, password: "seven").should_not be_valid
-  end
 
 
 
